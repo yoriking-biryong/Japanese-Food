@@ -1,0 +1,11 @@
+.card-blank-practice{margin-top:10px;padding:10px;border:1px dashed #b8c9e2;border-radius:8px;background:#f7faff;touch-action:pan-y}
+.timeline-card .card-blank-sentence{margin:0;font-size:13px;line-height:2.1;white-space:pre-wrap;overflow-wrap:anywhere}
+.card-blank-practice .blank-slot{margin:3px 2px}
+.card-blank-practice .blank-slot select{font-size:12px;min-width:84px;min-height:36px}
+.card-blank-result{display:flex;flex-wrap:wrap;gap:5px 8px;margin-top:10px;font-size:11px;line-height:1.7;color:#52647c}
+.card-blank-result strong{color:var(--ink)}
+.card-blank-result ul{flex-basis:100%;margin:0;padding-left:18px}
+.card-blank-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.card-blank-actions button{font-size:11px;padding:6px 9px;min-height:32px}
+.card-blank-actions button[type=submit]{background:#263f75;color:white;border-color:#263f75}
+.card-blank-actions .text-button{margin-left:auto}

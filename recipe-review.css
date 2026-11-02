@@ -1,0 +1,9 @@
+.recipe-review-start{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px;background:#edf3fc;border:1px solid #bccfe6;border-radius:12px;margin-bottom:22px}
+.recipe-review-start h2{font-size:1.08rem}.recipe-review-start p{font-size:.85rem;color:#52647c;margin-top:6px}.recipe-review-start button{white-space:normal}
+.recipe-review-dialog{width:min(1000px,calc(100% - 28px))}.recipe-review-dialog>.blank-heading p{font-size:.8rem;color:#60718a;margin-top:7px}
+.recipe-review-card{padding:18px;border:1px solid #d5deeb;border-radius:10px;margin:15px 0;background:#f9fbfe}
+.recipe-review-card h3{font-size:.94rem;display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.recipe-review-card h3 small{font-size:.78rem;color:#667993;font-weight:500}
+.recipe-review-card .blank-sentence{font-size:.94rem;line-height:2.4}.recipe-review-card input{padding:6px 9px;border:1px solid #b4c5dd;border-radius:6px;max-width:100%;width:300px;min-height:40px;background:#fff;font-size:.88rem}
+.recipe-review-hint{font-size:.76rem;color:#68778d;margin-top:8px}.recipe-review-feedback{font-size:.83rem;color:#294d79;line-height:1.7;margin-top:10px}.recipe-review-feedback:empty{display:none}
+.recipe-review-dialog input.answer-correct{border-color:#34845b;background:#edf8ef}.recipe-review-dialog input.answer-wrong{border-color:#ba5f3b;background:#fff0e9}
+@media(max-width:600px){.recipe-review-start{padding:15px}.recipe-review-start button{width:100%}.recipe-review-card{padding:13px}.recipe-review-card input{width:190px}.recipe-review-dialog{padding:18px}.recipe-review-dialog .blank-actions{flex-wrap:wrap}}

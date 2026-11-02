@@ -1,0 +1,20 @@
+.recipe-mark-row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;align-items:start;border-radius:9px;padding:5px;transition:background-color .15s}
+.recipe-mark-content{min-width:0}.recipe-mark-content>p{padding:8px 10px}.recipe-mark-content>.blank-launch{width:100%}
+.recipe-mark-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px;padding:10px 12px;margin:12px 0 18px;background:#fffaf0;border:1px solid #e7d9ad;border-radius:8px}
+.recipe-mark-toolbar>p:first-child{font-size:.79rem;color:#6a5b38;flex:1;min-width:180px;line-height:1.7}
+.recipe-mark-toolbar button{font-size:.8rem;white-space:normal;color:#765709}
+.recipe-mark-status{font-size:.8rem;color:#765709;line-height:1.7;flex-basis:100%}
+.recipe-mark-status:empty{display:none}
+.recipe-mark-notes-intro{font-size:.9rem;color:#596b84;margin-bottom:18px}
+.recipe-mark-group{margin-bottom:18px}.recipe-mark-group .eyebrow{color:#856212;margin-bottom:5px}
+.recipe-mark-group>ul{padding:0;margin:0;list-style:none;display:grid;gap:16px}
+.recipe-mark-note{border:1px solid #e4d9b6;border-radius:10px;padding:16px;background:#fffdf6}
+.recipe-mark-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:9px;font-size:.82rem}
+.recipe-mark-meta strong{color:#77580c}.recipe-mark-meta time{font-size:.76rem;color:#69778c}
+.recipe-mark-saved-text{font-size:.94rem;line-height:1.9;padding:10px 12px;background:#f3f6fa;border-radius:6px}
+.recipe-mark-links{display:flex;flex-wrap:wrap;gap:5px}
+.recipe-mark-note-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}
+.recipe-mark-note-actions button{font-size:.8rem}.recipe-mark-note-actions .text-button{color:#856212}
+.tabs-small{flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){.recipe-mark-row{transition:none}}
+@media(max-width:600px){.recipe-mark-row{gap:5px;padding:4px;grid-template-columns:minmax(0,1fr)}.recipe-mark-note{padding:12px}.recipe-mark-group .panel-head{flex-wrap:wrap}.recipe-mark-content>p{padding:6px}.recipe-mark-toolbar{padding:10px}}

@@ -1,0 +1,4 @@
+.requirement-value{color:#a13f18!important;text-decoration:underline;text-decoration-color:#c97d5a;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:750}
+.reference-legend{font-size:.77rem;line-height:1.8;color:#5f6d81;margin:10px 0 14px}
+.reference-classroom{display:inline-block;margin-left:14px;color:#304c77}
+@media print{.requirement-value{color:#a13f18!important;text-decoration:underline!important;print-color-adjust:exact}.reference-legend{font-size:9pt}}

@@ -1,0 +1,15 @@
+{
+  "name": "ilsik-study",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "일식조리기능사 실기 학습 사이트",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node preview.mjs",
+    "check": "node scripts/check.mjs",
+    "build:offline": "node --input-type=module -e \"import {buildOfflineAssets} from './offline-assets.mjs'; console.log(buildOfflineAssets().version);\""
+  }
+}

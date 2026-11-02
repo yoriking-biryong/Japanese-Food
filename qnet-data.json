@@ -1,0 +1,995 @@
+{
+  "version": 1,
+  "year": 2026,
+  "sourceCheckedAt": "2026-09-29",
+  "noticeUrl": "https://www.q-net.or.kr/man004.do?ARTL_SEQ=5249930&BOARD_ID=Q001&gSite=Q&id=man00402&notiType=10",
+  "calendarUrl": "https://mo.q-net.or.kr/sch001.do?gId=&gSite=Q&id=sch00103",
+  "regionalUrl": "https://www.q-net.or.kr/man004.do?id=man00401&gSite=Q&gId=&notiType=65",
+  "written": [
+    {
+      "round": 1,
+      "registrationStart": "2026-01-06",
+      "registrationEnd": "2026-01-07",
+      "examStart": "2026-01-12",
+      "examEnd": "2026-01-16",
+      "examRanges": [
+        [
+          "2026-01-12",
+          "2026-01-16"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 2,
+      "registrationStart": "2026-01-13",
+      "registrationEnd": "2026-01-14",
+      "examStart": "2026-01-19",
+      "examEnd": "2026-01-23",
+      "examRanges": [
+        [
+          "2026-01-19",
+          "2026-01-23"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 3,
+      "registrationStart": "2026-01-20",
+      "registrationEnd": "2026-01-21",
+      "examStart": "2026-01-26",
+      "examEnd": "2026-01-30",
+      "examRanges": [
+        [
+          "2026-01-26",
+          "2026-01-30"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 4,
+      "registrationStart": "2026-01-27",
+      "registrationEnd": "2026-01-28",
+      "examStart": "2026-02-02",
+      "examEnd": "2026-02-06",
+      "examRanges": [
+        [
+          "2026-02-02",
+          "2026-02-06"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 5,
+      "registrationStart": "2026-02-03",
+      "registrationEnd": "2026-02-04",
+      "examStart": "2026-02-09",
+      "examEnd": "2026-02-13",
+      "examRanges": [
+        [
+          "2026-02-09",
+          "2026-02-13"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 6,
+      "registrationStart": "2026-02-25",
+      "registrationEnd": "2026-02-26",
+      "examStart": "2026-03-03",
+      "examEnd": "2026-03-06",
+      "examRanges": [
+        [
+          "2026-03-03",
+          "2026-03-06"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 7,
+      "registrationStart": "2026-03-03",
+      "registrationEnd": "2026-03-04",
+      "examStart": "2026-03-09",
+      "examEnd": "2026-03-13",
+      "examRanges": [
+        [
+          "2026-03-09",
+          "2026-03-13"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 8,
+      "registrationStart": "2026-03-10",
+      "registrationEnd": "2026-03-11",
+      "examStart": "2026-03-16",
+      "examEnd": "2026-03-20",
+      "examRanges": [
+        [
+          "2026-03-16",
+          "2026-03-17"
+        ],
+        [
+          "2026-03-19",
+          "2026-03-20"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 9,
+      "registrationStart": "2026-03-17",
+      "registrationEnd": "2026-03-19",
+      "examStart": "2026-03-23",
+      "examEnd": "2026-03-27",
+      "examRanges": [
+        [
+          "2026-03-23",
+          "2026-03-27"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 10,
+      "registrationStart": "2026-03-24",
+      "registrationEnd": "2026-03-25",
+      "examStart": "2026-03-30",
+      "examEnd": "2026-04-03",
+      "examRanges": [
+        [
+          "2026-03-30",
+          "2026-04-03"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 11,
+      "registrationStart": "2026-03-31",
+      "registrationEnd": "2026-04-01",
+      "examStart": "2026-04-06",
+      "examEnd": "2026-04-10",
+      "examRanges": [
+        [
+          "2026-04-06",
+          "2026-04-10"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 12,
+      "registrationStart": "2026-04-07",
+      "registrationEnd": "2026-04-08",
+      "examStart": "2026-04-13",
+      "examEnd": "2026-04-17",
+      "examRanges": [
+        [
+          "2026-04-13",
+          "2026-04-17"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 13,
+      "registrationStart": "2026-04-14",
+      "registrationEnd": "2026-04-15",
+      "examStart": "2026-04-20",
+      "examEnd": "2026-04-24",
+      "examRanges": [
+        [
+          "2026-04-20",
+          "2026-04-24"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 14,
+      "registrationStart": "2026-04-21",
+      "registrationEnd": "2026-04-22",
+      "examStart": "2026-04-27",
+      "examEnd": "2026-04-30",
+      "examRanges": [
+        [
+          "2026-04-27",
+          "2026-04-30"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 15,
+      "registrationStart": "2026-05-06",
+      "registrationEnd": "2026-05-07",
+      "examStart": "2026-05-11",
+      "examEnd": "2026-05-15",
+      "examRanges": [
+        [
+          "2026-05-11",
+          "2026-05-15"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 16,
+      "registrationStart": "2026-05-12",
+      "registrationEnd": "2026-05-13",
+      "examStart": "2026-05-18",
+      "examEnd": "2026-05-22",
+      "examRanges": [
+        [
+          "2026-05-18",
+          "2026-05-22"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 17,
+      "registrationStart": "2026-05-26",
+      "registrationEnd": "2026-05-27",
+      "examStart": "2026-06-01",
+      "examEnd": "2026-06-05",
+      "examRanges": [
+        [
+          "2026-06-01",
+          "2026-06-02"
+        ],
+        [
+          "2026-06-04",
+          "2026-06-05"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 18,
+      "registrationStart": "2026-06-02",
+      "registrationEnd": "2026-06-04",
+      "examStart": "2026-06-08",
+      "examEnd": "2026-06-12",
+      "examRanges": [
+        [
+          "2026-06-08",
+          "2026-06-12"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 19,
+      "registrationStart": "2026-06-09",
+      "registrationEnd": "2026-06-10",
+      "examStart": "2026-06-15",
+      "examEnd": "2026-06-19",
+      "examRanges": [
+        [
+          "2026-06-15",
+          "2026-06-19"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 20,
+      "registrationStart": "2026-06-16",
+      "registrationEnd": "2026-06-17",
+      "examStart": "2026-06-22",
+      "examEnd": "2026-06-26",
+      "examRanges": [
+        [
+          "2026-06-22",
+          "2026-06-26"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 21,
+      "registrationStart": "2026-06-23",
+      "registrationEnd": "2026-06-24",
+      "examStart": "2026-06-29",
+      "examEnd": "2026-07-03",
+      "examRanges": [
+        [
+          "2026-06-29",
+          "2026-07-03"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 22,
+      "registrationStart": "2026-07-14",
+      "registrationEnd": "2026-07-15",
+      "examStart": "2026-07-20",
+      "examEnd": "2026-07-24",
+      "examRanges": [
+        [
+          "2026-07-20",
+          "2026-07-24"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 23,
+      "registrationStart": "2026-07-21",
+      "registrationEnd": "2026-07-22",
+      "examStart": "2026-07-27",
+      "examEnd": "2026-07-31",
+      "examRanges": [
+        [
+          "2026-07-27",
+          "2026-07-31"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 24,
+      "registrationStart": "2026-07-28",
+      "registrationEnd": "2026-07-29",
+      "examStart": "2026-08-03",
+      "examEnd": "2026-08-07",
+      "examRanges": [
+        [
+          "2026-08-03",
+          "2026-08-07"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 25,
+      "registrationStart": "2026-08-04",
+      "registrationEnd": "2026-08-05",
+      "examStart": "2026-08-10",
+      "examEnd": "2026-08-14",
+      "examRanges": [
+        [
+          "2026-08-10",
+          "2026-08-14"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 26,
+      "registrationStart": "2026-08-12",
+      "registrationEnd": "2026-08-13",
+      "examStart": "2026-08-18",
+      "examEnd": "2026-08-21",
+      "examRanges": [
+        [
+          "2026-08-18",
+          "2026-08-21"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 27,
+      "registrationStart": "2026-08-25",
+      "registrationEnd": "2026-08-26",
+      "examStart": "2026-08-31",
+      "examEnd": "2026-09-04",
+      "examRanges": [
+        [
+          "2026-08-31",
+          "2026-09-04"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 28,
+      "registrationStart": "2026-09-01",
+      "registrationEnd": "2026-09-02",
+      "examStart": "2026-09-07",
+      "examEnd": "2026-09-11",
+      "examRanges": [
+        [
+          "2026-09-07",
+          "2026-09-11"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 29,
+      "registrationStart": "2026-09-08",
+      "registrationEnd": "2026-09-09",
+      "examStart": "2026-09-14",
+      "examEnd": "2026-09-18",
+      "examRanges": [
+        [
+          "2026-09-14",
+          "2026-09-18"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 30,
+      "registrationStart": "2026-09-30",
+      "registrationEnd": "2026-10-01",
+      "examStart": "2026-10-06",
+      "examEnd": "2026-10-08",
+      "examRanges": [
+        [
+          "2026-10-06",
+          "2026-10-08"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 31,
+      "registrationStart": "2026-10-06",
+      "registrationEnd": "2026-10-07",
+      "examStart": "2026-10-12",
+      "examEnd": "2026-10-16",
+      "examRanges": [
+        [
+          "2026-10-12",
+          "2026-10-16"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 32,
+      "registrationStart": "2026-10-13",
+      "registrationEnd": "2026-10-14",
+      "examStart": "2026-10-19",
+      "examEnd": "2026-10-23",
+      "examRanges": [
+        [
+          "2026-10-19",
+          "2026-10-23"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 33,
+      "registrationStart": "2026-10-20",
+      "registrationEnd": "2026-10-21",
+      "examStart": "2026-10-26",
+      "examEnd": "2026-10-30",
+      "examRanges": [
+        [
+          "2026-10-26",
+          "2026-10-30"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 34,
+      "registrationStart": "2026-10-27",
+      "registrationEnd": "2026-10-28",
+      "examStart": "2026-11-02",
+      "examEnd": "2026-11-06",
+      "examRanges": [
+        [
+          "2026-11-02",
+          "2026-11-06"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 35,
+      "registrationStart": "2026-11-03",
+      "registrationEnd": "2026-11-04",
+      "examStart": "2026-11-09",
+      "examEnd": "2026-11-13",
+      "examRanges": [
+        [
+          "2026-11-09",
+          "2026-11-13"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 36,
+      "registrationStart": "2026-11-10",
+      "registrationEnd": "2026-11-11",
+      "examStart": "2026-11-16",
+      "examEnd": "2026-11-20",
+      "examRanges": [
+        [
+          "2026-11-16",
+          "2026-11-20"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 37,
+      "registrationStart": "2026-11-17",
+      "registrationEnd": "2026-11-18",
+      "examStart": "2026-11-23",
+      "examEnd": "2026-11-27",
+      "examRanges": [
+        [
+          "2026-11-23",
+          "2026-11-27"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 38,
+      "registrationStart": "2026-11-24",
+      "registrationEnd": "2026-11-25",
+      "examStart": "2026-11-30",
+      "examEnd": "2026-12-04",
+      "examRanges": [
+        [
+          "2026-11-30",
+          "2026-12-04"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 39,
+      "registrationStart": "2026-12-01",
+      "registrationEnd": "2026-12-02",
+      "examStart": "2026-12-07",
+      "examEnd": "2026-12-11",
+      "examRanges": [
+        [
+          "2026-12-07",
+          "2026-12-11"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 40,
+      "registrationStart": "2026-12-08",
+      "registrationEnd": "2026-12-09",
+      "examStart": "2026-12-14",
+      "examEnd": "2026-12-18",
+      "examRanges": [
+        [
+          "2026-12-14",
+          "2026-12-18"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    },
+    {
+      "round": 41,
+      "registrationStart": "2026-12-15",
+      "registrationEnd": "2026-12-16",
+      "examStart": "2026-12-21",
+      "examEnd": "2026-12-23",
+      "examRanges": [
+        [
+          "2026-12-21",
+          "2026-12-23"
+        ]
+      ],
+      "resultDate": null,
+      "source": "notice"
+    }
+  ],
+  "practical": [
+    {
+      "round": 1,
+      "registrationStart": "2026-01-08",
+      "registrationEnd": "2026-01-09",
+      "examStart": "2026-01-19",
+      "examEnd": "2026-01-30",
+      "examRanges": [
+        [
+          "2026-01-19",
+          "2026-01-30"
+        ]
+      ],
+      "resultDate": "2026-02-05",
+      "source": "notice"
+    },
+    {
+      "round": 2,
+      "registrationStart": "2026-01-22",
+      "registrationEnd": "2026-01-23",
+      "examStart": "2026-02-02",
+      "examEnd": "2026-02-10",
+      "examRanges": [
+        [
+          "2026-02-02",
+          "2026-02-10"
+        ]
+      ],
+      "resultDate": "2026-02-19",
+      "source": "notice"
+    },
+    {
+      "round": 3,
+      "registrationStart": "2026-02-05",
+      "registrationEnd": "2026-02-06",
+      "examStart": "2026-02-23",
+      "examEnd": "2026-02-27",
+      "examRanges": [
+        [
+          "2026-02-23",
+          "2026-02-27"
+        ]
+      ],
+      "resultDate": "2026-03-05",
+      "source": "notice"
+    },
+    {
+      "round": 4,
+      "registrationStart": "2026-02-19",
+      "registrationEnd": "2026-02-20",
+      "examStart": "2026-03-03",
+      "examEnd": "2026-03-13",
+      "examRanges": [
+        [
+          "2026-03-03",
+          "2026-03-13"
+        ]
+      ],
+      "resultDate": "2026-03-19",
+      "source": "notice"
+    },
+    {
+      "round": 5,
+      "registrationStart": "2026-03-05",
+      "registrationEnd": "2026-03-06",
+      "examStart": "2026-03-16",
+      "examEnd": "2026-03-27",
+      "examRanges": [
+        [
+          "2026-03-16",
+          "2026-03-27"
+        ]
+      ],
+      "resultDate": "2026-04-02",
+      "source": "notice"
+    },
+    {
+      "round": 6,
+      "registrationStart": "2026-03-19",
+      "registrationEnd": "2026-03-20",
+      "examStart": "2026-03-30",
+      "examEnd": "2026-04-10",
+      "examRanges": [
+        [
+          "2026-03-30",
+          "2026-04-10"
+        ]
+      ],
+      "resultDate": "2026-04-16",
+      "source": "notice"
+    },
+    {
+      "round": 7,
+      "registrationStart": "2026-04-02",
+      "registrationEnd": "2026-04-03",
+      "examStart": "2026-04-13",
+      "examEnd": "2026-04-24",
+      "examRanges": [
+        [
+          "2026-04-13",
+          "2026-04-24"
+        ]
+      ],
+      "resultDate": "2026-04-29",
+      "source": "notice"
+    },
+    {
+      "round": 8,
+      "registrationStart": "2026-04-16",
+      "registrationEnd": "2026-04-17",
+      "examStart": "2026-04-27",
+      "examEnd": "2026-05-08",
+      "examRanges": [
+        [
+          "2026-04-27",
+          "2026-05-08"
+        ]
+      ],
+      "resultDate": "2026-05-14",
+      "source": "notice"
+    },
+    {
+      "round": 9,
+      "registrationStart": "2026-04-29",
+      "registrationEnd": "2026-04-30",
+      "examStart": "2026-05-11",
+      "examEnd": "2026-05-22",
+      "examRanges": [
+        [
+          "2026-05-11",
+          "2026-05-22"
+        ]
+      ],
+      "resultDate": "2026-05-28",
+      "source": "notice"
+    },
+    {
+      "round": 10,
+      "registrationStart": "2026-05-14",
+      "registrationEnd": "2026-05-15",
+      "examStart": "2026-05-26",
+      "examEnd": "2026-06-05",
+      "examRanges": [
+        [
+          "2026-05-26",
+          "2026-06-05"
+        ]
+      ],
+      "resultDate": "2026-06-11",
+      "source": "notice"
+    },
+    {
+      "round": 11,
+      "registrationStart": "2026-05-28",
+      "registrationEnd": "2026-05-29",
+      "examStart": "2026-06-08",
+      "examEnd": "2026-06-19",
+      "examRanges": [
+        [
+          "2026-06-08",
+          "2026-06-19"
+        ]
+      ],
+      "resultDate": "2026-06-25",
+      "source": "notice"
+    },
+    {
+      "round": 12,
+      "registrationStart": "2026-06-11",
+      "registrationEnd": "2026-06-12",
+      "examStart": "2026-06-22",
+      "examEnd": "2026-07-03",
+      "examRanges": [
+        [
+          "2026-06-22",
+          "2026-07-03"
+        ]
+      ],
+      "resultDate": "2026-07-09",
+      "source": "notice"
+    },
+    {
+      "round": 13,
+      "registrationStart": "2026-06-25",
+      "registrationEnd": "2026-06-26",
+      "examStart": "2026-07-06",
+      "examEnd": "2026-07-16",
+      "examRanges": [
+        [
+          "2026-07-06",
+          "2026-07-16"
+        ]
+      ],
+      "resultDate": "2026-07-23",
+      "source": "notice"
+    },
+    {
+      "round": 14,
+      "registrationStart": "2026-07-09",
+      "registrationEnd": "2026-07-10",
+      "examStart": "2026-07-20",
+      "examEnd": "2026-07-31",
+      "examRanges": [
+        [
+          "2026-07-20",
+          "2026-07-31"
+        ]
+      ],
+      "resultDate": "2026-08-06",
+      "source": "notice"
+    },
+    {
+      "round": 15,
+      "registrationStart": "2026-07-23",
+      "registrationEnd": "2026-07-24",
+      "examStart": "2026-08-03",
+      "examEnd": "2026-08-14",
+      "examRanges": [
+        [
+          "2026-08-03",
+          "2026-08-14"
+        ]
+      ],
+      "resultDate": "2026-08-20",
+      "source": "notice"
+    },
+    {
+      "round": 16,
+      "registrationStart": "2026-08-06",
+      "registrationEnd": "2026-08-07",
+      "examStart": "2026-08-18",
+      "examEnd": "2026-08-28",
+      "examRanges": [
+        [
+          "2026-08-18",
+          "2026-08-28"
+        ]
+      ],
+      "resultDate": "2026-09-03",
+      "source": "notice"
+    },
+    {
+      "round": 17,
+      "registrationStart": "2026-08-20",
+      "registrationEnd": "2026-08-21",
+      "examStart": "2026-08-31",
+      "examEnd": "2026-09-11",
+      "examRanges": [
+        [
+          "2026-08-31",
+          "2026-09-11"
+        ]
+      ],
+      "resultDate": "2026-09-17",
+      "source": "notice"
+    },
+    {
+      "round": 18,
+      "registrationStart": "2026-09-03",
+      "registrationEnd": "2026-09-04",
+      "examStart": "2026-09-14",
+      "examEnd": "2026-09-21",
+      "examRanges": [
+        [
+          "2026-09-14",
+          "2026-09-21"
+        ]
+      ],
+      "resultDate": "2026-10-01",
+      "source": "notice"
+    },
+    {
+      "round": 19,
+      "registrationStart": "2026-09-17",
+      "registrationEnd": "2026-09-18",
+      "examStart": "2026-09-30",
+      "examEnd": "2026-10-08",
+      "examRanges": [
+        [
+          "2026-09-30",
+          "2026-10-08"
+        ]
+      ],
+      "resultDate": "2026-10-15",
+      "source": "notice"
+    },
+    {
+      "round": 20,
+      "registrationStart": "2026-10-01",
+      "registrationEnd": "2026-10-02",
+      "examStart": "2026-10-12",
+      "examEnd": "2026-10-23",
+      "examRanges": [
+        [
+          "2026-10-12",
+          "2026-10-23"
+        ]
+      ],
+      "resultDate": "2026-10-29",
+      "source": "notice"
+    },
+    {
+      "round": 21,
+      "registrationStart": "2026-10-15",
+      "registrationEnd": "2026-10-16",
+      "examStart": "2026-10-26",
+      "examEnd": "2026-11-06",
+      "examRanges": [
+        [
+          "2026-10-26",
+          "2026-11-06"
+        ]
+      ],
+      "resultDate": "2026-11-12",
+      "source": "notice"
+    },
+    {
+      "round": 22,
+      "registrationStart": "2026-10-29",
+      "registrationEnd": "2026-10-30",
+      "examStart": "2026-11-09",
+      "examEnd": "2026-11-20",
+      "examRanges": [
+        [
+          "2026-11-09",
+          "2026-11-20"
+        ]
+      ],
+      "resultDate": "2026-11-26",
+      "source": "notice"
+    },
+    {
+      "round": 23,
+      "registrationStart": "2026-11-12",
+      "registrationEnd": "2026-11-13",
+      "examStart": "2026-11-23",
+      "examEnd": "2026-12-04",
+      "examRanges": [
+        [
+          "2026-11-23",
+          "2026-12-04"
+        ]
+      ],
+      "resultDate": "2026-12-10",
+      "source": "notice"
+    },
+    {
+      "round": 24,
+      "registrationStart": "2026-11-26",
+      "registrationEnd": "2026-11-27",
+      "examStart": "2026-12-07",
+      "examEnd": "2026-12-16",
+      "examRanges": [
+        [
+          "2026-12-07",
+          "2026-12-16"
+        ]
+      ],
+      "resultDate": "2026-12-22",
+      "source": "notice"
+    }
+  ]
+}

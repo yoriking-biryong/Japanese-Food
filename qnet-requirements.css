@@ -1,0 +1,17 @@
+.qnet-requirements{margin:14px 0 22px;padding:19px 20px;border:1px solid #cbd9ee;border-radius:12px;background:#f4f8ff}
+.qnet-requirements-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.qnet-requirements-head h4{margin:0;font-size:1rem;color:#263f75}
+.qnet-requirements-head>span{padding:4px 8px;border-radius:5px;background:#e4ecf9;color:#3a527a;font-size:.78rem;font-weight:650}
+.qnet-requirements-caption{margin:9px 0 14px;font-size:.8rem;line-height:1.6;color:#526580}
+.qnet-requirements-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.qnet-requirements-list>li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;align-items:start;font-size:.94rem;line-height:1.85;overflow-wrap:anywhere}
+.qnet-requirement-letter{font-weight:700;color:#496286}
+.qnet-requirements-list p{margin:0}
+.qnet-requirements-list .blank-launch{margin:0;width:100%}
+.qnet-requirements-list .qnet-requirement-caution{margin:7px 0 0;padding:9px 11px;background:#fff0e9;border-left:3px solid #b66b4e;border-radius:4px;font-size:.84rem;line-height:1.7;color:#844730}
+.qnet-requirement-time{padding:10px 12px;background:#fff4dd;border-radius:6px;font-size:.86rem;line-height:1.7;color:#765214;margin:12px 0}
+.qnet-requirements-source{display:flex;flex-direction:column;align-items:flex-start;gap:3px;border-top:1px solid #d9e3f1;margin:17px 0 0;padding-top:12px;font-size:.75rem;line-height:1.7;color:#5a6b83}
+.qnet-requirements-source a{color:#2b4d87;text-underline-offset:3px;font-weight:600}
+.qnet-classroom-heading{font-size:.9rem;color:var(--muted);margin:18px 0 9px}
+.sorting-requirements-menu .qnet-requirements{padding:14px;margin-bottom:18px}
+@media(max-width:600px){.qnet-requirements{padding:15px}.qnet-requirements-list>li{font-size:.9rem;gap:4px}.qnet-requirements-head{align-items:flex-start}.sorting-requirements-menu .qnet-requirements{padding:12px}}

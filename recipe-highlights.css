@@ -1,0 +1,18 @@
+[data-recipe-selectable],.recipe-mark-content .blank-launch{-webkit-user-select:text;user-select:text;cursor:text}
+[data-recipe-selectable]::selection,[data-recipe-selectable] *::selection{background:#ffe16f;color:#172d50}
+mark.recipe-highlight,.recipe-highlight-quote mark,.recipe-highlight-notes details mark{background:#ffe67f;color:inherit;border-radius:2px;padding:1px 0;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.recipe-highlight-quote{font-size:1rem;line-height:1.9;padding:10px 0}
+.recipe-highlight-notes details{padding:10px 0;border:0}.recipe-highlight-notes details p{font-size:.86rem;line-height:1.9;margin-top:9px;color:#52647c}.recipe-highlight-notes summary{font-size:.8rem;color:#52647c}
+.recipe-highlight-status{font-size:.85rem;color:#805d10;line-height:1.7;margin:10px 0}.recipe-highlight-status:empty{display:none}
+.summary-highlight-row .recipe-mark-row{padding:0;gap:0}
+.summary-highlight-row .recipe-mark-content>p{margin:0;padding:0;font-size:inherit;line-height:inherit;color:inherit}
+.summary-table-scroll .summary-highlight-row{font-weight:700}
+.summary-highlight-toolbar{margin:12px 0}
+.summary-highlight-toolbar .recipe-highlight-status{flex-basis:100%;margin:0}
+.menu-writing-result .recipe-mark-row,.comparison .recipe-mark-row{padding:0}
+.menu-writing-result .recipe-mark-content>p,.comparison .recipe-mark-content>p{margin:0;padding:5px 0;line-height:1.8}
+.menu-writing-lines>li>.menu-practice-kicker{display:block;margin-bottom:4px}
+.comparison-highlight-tools .source-note{margin:8px 0 16px}
+[data-comparison-selectable]{-webkit-user-select:text;user-select:text;cursor:text;margin:0;padding:5px 0;line-height:1.8}
+[data-comparison-selectable]::selection,[data-comparison-selectable] *::selection{background:#f9bfd5;color:#4d2034}
+mark.comparison-pink{background:#f9bfd5;color:inherit;border-radius:2px;padding:1px 0;box-decoration-break:clone;-webkit-box-decoration-break:clone}

@@ -1,0 +1,26 @@
+.blank-launch{display:block;width:100%;text-align:left;border:1px dashed #b8c9e2;border-radius:7px;background:#f7faff;padding:10px 12px;color:inherit;font:inherit;line-height:1.8;cursor:pointer;touch-action:manipulation}
+.blank-launch:hover:not(:disabled){background:#eaf1fb;border-color:#547ab4}
+.blank-launch>span{display:block;font-size:inherit;white-space:pre-wrap}
+.blank-launch>small{display:block;font-size:11px;font-weight:600;color:#365d99;margin-top:6px}
+.timeline-card .blank-launch{font-size:13px}
+.work-choice .blank-launch{font-size:14px;margin-bottom:10px}
+.work-choice-add{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.work-choice-add>small{font-size:11px;color:var(--muted)}
+.work-choice-add>button{font-size:12px}
+.recipe-blank-dialog{width:min(760px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:24px;overflow:auto;border:1px solid #ced8e6;border-radius:16px;color:var(--ink);font-family:inherit}
+.recipe-blank-dialog::backdrop{background:#162b45a6}
+.blank-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.blank-heading h2{font-size:1.25rem;margin:5px 0 0}
+.blank-guide{font-size:13px;color:var(--muted);margin:14px 0}
+.blank-sentence{padding:18px;background:#f3f6fb;border:1px solid #dde5f0;border-radius:10px;font-size:15px;line-height:2.8;white-space:pre-wrap;overflow-wrap:anywhere}
+.blank-slot{display:inline-flex;align-items:center;max-width:100%;gap:4px;margin:3px 4px;vertical-align:middle}
+.blank-number{font-size:10px;color:#506992;font-weight:700}
+.blank-slot select{width:auto;max-width:calc(100% - 18px);min-width:100px;min-height:42px;padding:7px 26px 7px 9px;font:inherit;font-size:14px;line-height:1.5;border:1px solid #7896be;border-radius:6px;color:#294d89;background:white;white-space:normal}
+.blank-slot .answer-correct{border-color:#367855;background:#edf8f1}
+.blank-slot .answer-wrong{border-color:#b15537;background:#fff1eb}
+.blank-result{margin:16px 0;color:#52647c;font-size:13px;min-height:24px}
+.blank-result>strong{font-size:17px;color:var(--ink)}
+.blank-result ul{padding-left:21px;margin-top:8px;line-height:1.9}
+.blank-result p{margin-top:6px}
+.blank-actions{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
+@media(max-width:600px){.recipe-blank-dialog{padding:17px}.blank-sentence{padding:12px;font-size:14px}.blank-heading h2{font-size:1.1rem}}
