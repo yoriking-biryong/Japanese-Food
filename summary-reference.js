@@ -55,15 +55,15 @@ window.SummaryReference = (() => {
   }
   // Complete geometries and ranges remain distinct; comparison notes for other dishes are excluded.
   const sizeKeys={
-    'jp-01':[['0.3cm','5cm']], 'jp-02':[['4~5cm'],['50~60g']], 'jp-03':[],
+    'jp-01':[['0.3cm','5cm']], 'jp-02':[['4~5cm'],['50~60g'],['레몬 모양']], 'jp-03':[['레몬 모양']],
     'jp-04':[['1 × 1 × 1cm'],['1 × 1cm']], 'jp-05':[['5cm','5~6cm'],['5cm']],
-    'jp-06':[['4~5cm'],['4~5cm'],['0.1~0.2cm'],['한입 크기 · 상대 크기']], 'jp-07':[['0.1~0.2cm'],['2~3cm'],['4cm','4~5cm'],['한입 크기 · 상대 크기']],
+    'jp-06':[['4~5cm'],['4~5cm'],['0.1~0.2cm'],['한입 크기 · 상대 크기'],['레몬 모양']], 'jp-07':[['0.1~0.2cm'],['2~3cm'],['4cm','4~5cm'],['한입 크기 · 상대 크기'],['레몬 모양']],
     'jp-08':[['4cm'],['2cm'],['4cm']], 'jp-09':[['1cm','4cm'],['1cm','4cm'],['0.2~0.3cm','1cm','4cm']],
-    'jp-10':[['2~3cm']], 'jp-11':[['5cm'],['10cm','제출 2개'],['0.5cm','3cm'],['2~3cm']],
+    'jp-10':[['2~3cm']], 'jp-11':[['5cm'],['10cm','제출 2개'],['0.5cm','3cm'],['2~3cm','레몬 모양']],
     'jp-12':[['1.5cm'],['1.5cm','3cm']], 'jp-13':[['한입 크기 · 상대 크기'],['한입 크기 · 상대 크기']],
     'jp-14':[['1cm','2.5cm','8cm','제출 8개']],
-    'jp-15':[['5~6cm','6cm'],['0.5cm','1cm'],['0.35cm'],['1.5cm'],['4~5cm'],['4cm']],
-    'jp-16':[['1cm'],['1cm']], 'jp-17':[['3cm','7cm'],['7cm'],['밥 20g','생선 6종류','제출 8개']],
+    'jp-15':[['5~6cm','6cm'],['0.5cm','1cm'],['0.35cm','레몬 모양'],['1.5cm'],['4~5cm'],['4cm']],
+    'jp-16':[['1cm'],['1cm'],['레몬 모양']], 'jp-17':[['3cm','7cm'],['7cm'],['밥 20g','생선 6종류','제출 8개']],
     'jp-18':[['김 2줄','제출 12개']], 'jp-19':[['1cm'],['1.5cm'],['제출 8개']]
   };
   const families=[
@@ -78,7 +78,7 @@ window.SummaryReference = (() => {
     ['식용유 · 참기름','팬 코팅용 준비량과 실제 넣는 양을 구분해요.'],
     ['밑간 · 조리 중 간','재료별 간과 마무리 양념을 비교해요.'],
     ['고추냉이','비율 또는 물을 조금씩 넣는 방식으로 농도를 맞춰요.'],
-    ['곁들이기 · 고명','수치가 지정되지 않은 간장은 임의의 용량을 붙이지 않아요.'],
+    ['곁들이기 · 고명','도미술찜 폰즈·메밀국수 소바다시·초밥 간장은 별도 그릇에 내요. 소바다시는 차게 식혀요. 수치가 없는 곁들임은 임의의 용량을 붙이지 않아요.'],
     ['명란 풀기 · 무침 비율','명란을 푸는 물 1t와 갑오징어:명란 2:1을 따로 기억해요.']
   ];
   function sauceFamily(entry) {
@@ -94,7 +94,7 @@ window.SummaryReference = (() => {
     if(/볶기 시작|양파 볶기|팬에 굽기|팬 코팅용|불 끈 뒤 마무리/.test(l))return families[8][0];
     if(/밑간|마지막 간|전복 볶기/.test(l))return families[9][0];
     if(/고추냉이/.test(l))return families[10][0];
-    if(/곁들이기|고명/.test(l))return families[11][0];
+    if(/곁들이기|고명|^마무리$/.test(l))return families[11][0];
     return families[12][0];
   }
   function amountKeys(text) {
@@ -104,10 +104,12 @@ window.SummaryReference = (() => {
   function entries(mode) {
     return window.MENUS.flatMap(menu=>(window.LESSON_STUDY_NOTES[menu.id]?.[mode]||[]).map(([label,text,steps],index)=>({key:`${menu.id}:${mode}:${index}`,menu,mode,index,label,text,steps})));
   }
+  // One source row can be reviewed by both recipe family and serving purpose.
+  const separateSauces=new Set(['jp-15:sauces:1','jp-10:sauces:1']);
   function group(entries, by) {
     const result=new Map();
     for(const e of entries){
-      const keys=by==='menu'?[e.menu.name]:e.mode==='sizes'?sizeKeys[e.menu.id][e.index]:by==='amount'?amountKeys(e.text):[sauceFamily(e)];
+      const keys=by==='menu'?[e.menu.name]:e.mode==='sizes'?sizeKeys[e.menu.id][e.index]:by==='amount'?amountKeys(e.text):[sauceFamily(e),...(separateSauces.has(e.key)?[families[11][0]]:[])];
       for(const key of keys){if(!result.has(key))result.set(key,[]);result.get(key).push(e);}
     }
     const grouped=[...result].map(([name,rows])=>({name,rows,description:by==='kind'&&entries[0]?.mode==='sauces'?(families.find(f=>f[0]===name)?.[1]||''):''}));

@@ -56,15 +56,30 @@ window.RecipeMarks = (() => {
     content = window.RecipeHighlights?.decorate(ref,content) || content;
     return `<div class="recipe-mark-row" data-recipe-mark-row="${esc(ref)}"><div class="recipe-mark-content">${content}</div></div>`;
   }
+  // One base range can carry a second, stronger layer without duplicating review notes.
+  function combineRanges(ranges) {
+    const result=[];
+    for(const range of ranges.map(r=>({start:r.start,end:r.end})).sort((a,b)=>a.start-b.start)){
+      const last=result.at(-1);
+      if(last&&last.end>=range.start)last.end=Math.max(last.end,range.end);else result.push(range);
+    }
+    return result;
+  }
+  function layerSegments(records) {
+    return records.flatMap(record=>{
+      const layers=record.emphasis||[],edges=[...new Set([record.start,record.end,...layers.flatMap(r=>[r.start,r.end])])].sort((a,b)=>a-b);
+      return edges.slice(0,-1).map((start,i)=>({...record,start,end:edges[i+1],rangeStart:record.start,rangeEnd:record.end,emphasized:layers.some(r=>r.start<=start&&r.end>=edges[i+1])}));
+    });
+  }
   function toolbar() {
-    return `<div class="recipe-mark-toolbar"><p>필요한 구절이나 문장 전체를 드래그해 형광펜으로 표시하세요. 다시 드래그하면 그 부분만 지워져요.</p><div class="recipe-mark-links"><button type="button" class="text-button" data-action="highlight-notes">형광펜 모아보기 <span data-recipe-highlight-count>${window.RecipeHighlights?.count()||0}</span> →</button></div><p class="recipe-mark-status" role="status" aria-live="polite">${esc(window.RecipeHighlights?.status()||'')}</p></div>`;
+    return `<div class="recipe-mark-toolbar"><p>필요한 구절이나 문장 전체를 드래그해 형광펜으로 표시하세요. 표시 위를 다시 드래그하면 더 넓고 진한 보라색으로 강조해요. 표시를 더블클릭하면 그 구절의 겹친 표시를 모두 지워요.</p><div class="recipe-mark-links"><button type="button" class="text-button" data-action="highlight-notes">형광펜 모아보기 <span data-recipe-highlight-count>${window.RecipeHighlights?.count()||0}</span> →</button></div><p class="recipe-mark-status" role="status" aria-live="polite">${esc(window.RecipeHighlights?.status()||'')}</p></div>`;
   }
   function summary(entry, content) {
     const formatted = window.SummaryReference.format(entry.menu.id,entry.mode,entry.index,entry.text);
     return `<div class="summary-highlight-row">${wrap('summary-'+entry.mode,entry.menu.id,entry.index,content||`<p>${formatted}</p>`)}</div>`;
   }
   function summaryToolbar() {
-    return `<div class="recipe-mark-toolbar summary-highlight-toolbar"><p>헷갈리는 소스·용량·치수를 드래그하면 내 학습 노트에 저장돼요. 다시 드래그하면 지워져요.</p><div class="recipe-mark-links"><button type="button" class="text-button" data-action="highlight-notes">형광펜 모아보기 <span data-recipe-highlight-count>${window.RecipeHighlights?.count()||0}</span> →</button></div><p class="recipe-highlight-status" role="status" aria-live="polite">${esc(window.RecipeHighlights?.status()||'')}</p></div>`;
+    return `<div class="recipe-mark-toolbar summary-highlight-toolbar"><p>헷갈리는 소스·용량·치수를 드래그하면 내 학습 노트에 저장돼요. 표시 위를 다시 드래그하면 보라색으로 더 강조하고, 표시를 더블클릭하면 그 구절의 겹친 표시를 모두 지워요.</p><div class="recipe-mark-links"><button type="button" class="text-button" data-action="highlight-notes">형광펜 모아보기 <span data-recipe-highlight-count>${window.RecipeHighlights?.count()||0}</span> →</button></div><p class="recipe-highlight-status" role="status" aria-live="polite">${esc(window.RecipeHighlights?.status()||'')}</p></div>`;
   }
   function caption(item) {
     if (isComparison(item.kind)) return item.label;
@@ -92,5 +107,5 @@ window.RecipeMarks = (() => {
     row.focus({preventScroll:true});
     return row;
   }
-  return {wrap,toolbar,summary,summaryToolbar,caption,isSummary,isComparison,reveal,source,target,locate,legacy,normalizeItem,init:options=>{hooks=options;}};
+  return {combineRanges,layerSegments,wrap,toolbar,summary,summaryToolbar,caption,isSummary,isComparison,reveal,source,target,locate,legacy,normalizeItem,init:options=>{hooks=options;}};
 })();

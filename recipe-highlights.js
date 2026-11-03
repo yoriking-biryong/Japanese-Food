@@ -7,12 +7,13 @@ window.RecipeHighlights = (() => {
   const bucket=kind=>marks.isComparison(kind)?'comparison':marks.isSummary(kind)?'summary':'recipe';
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const same=(a,b)=>a.kind===b.kind&&a.sourceId===b.sourceId&&a.text===b.text&&(bucket(a.kind)==='recipe'||a.label===b.label);
-  let hooks={},readFailed=false,blockedUntil=0,migration=null,migrationNotice='',readable=[];
+  let suppressDoubleSelection=false,hooks={},readFailed=false,blockedUntil=0,migration=null,migrationNotice='',readable=[];
   function validate(data,version,group='recipe'){
     if(data?.version!==version||!Array.isArray(data.items))throw Error('format');
     const ids=new Set();
     for(const x of data.items){
       if(!x||typeof x.id!=='string'||!/^[a-z0-9-]{1,100}$/i.test(x.id)||ids.has(x.id)||!marks.source(x.kind,x.sourceId)||typeof x.text!=='string'||!x.text.trim()||x.text.length>10000||!Number.isInteger(x.step)||x.step<1||!Number.isInteger(x.start)||!Number.isInteger(x.end)||x.start<0||x.end<=x.start||x.end>x.text.length||!x.text.slice(x.start,x.end).trim()||!Number.isFinite(x.createdAt)||x.createdAt<=0||!Number.isFinite(new Date(x.createdAt).getTime()))throw Error('entry');
+      if(x.emphasis!==undefined&&(!Array.isArray(x.emphasis)||x.emphasis.some(r=>!r||!Number.isInteger(r.start)||!Number.isInteger(r.end)||r.start<x.start||r.end>x.end||r.start>=r.end)))throw Error('emphasis');
       ids.add(x.id);
       if(bucket(x.kind)!==group)throw Error('source');
       if(group!=='recipe'&&(typeof x.label!=='string'||!x.label.trim()||x.label.length>1000))throw Error('label');
@@ -62,6 +63,8 @@ window.RecipeHighlights = (() => {
     for(let changed=true;changed;){changed=false;for(const x of fresh){if(same(x,item)&&x.start<=b&&x.end>=a&&!overlaps.includes(x)){overlaps.push(x);a=Math.min(a,x.start);b=Math.max(b,x.end);changed=true;}}}
     const original=overlaps.sort((x,y)=>x.createdAt-y.createdAt)[0];
     const record={id:original?.id||(globalThis.crypto?.randomUUID?.()||`highlight-${Date.now()}-${Math.random().toString(36).slice(2)}`),kind:item.kind,sourceId:item.sourceId,text:item.text,step:item.step,...(bucket(item.kind)!=='recipe'?{label:item.label}:{}),start:a,end:b,createdAt:Math.min(original?.createdAt||Infinity,item.createdAt||Date.now())};
+    const emphasis=marks.combineRanges([...overlaps.flatMap(x=>x.emphasis||[]),...(item.emphasis||[])]);
+    if(emphasis.length)record.emphasis=emphasis;
     return [...fresh.filter(x=>!overlaps.includes(x)),record];
   }
   function commit(next,text,kind){
@@ -70,21 +73,12 @@ window.RecipeHighlights = (() => {
     catch{message('형광펜을 저장하지 못했어요. 기존 표시는 유지했습니다.');return false;}
     items=next;paint();hooks.changed?.();message(text);return true;
   }
-  // Erase only the selected overlap; keep each unselected fragment for review.
-  function subtract(fresh,item,start,end){
-    return fresh.flatMap(x=>{
-      if(!same(x,item)||x.start>=end||x.end<=start)return [x];
-      return [[x.start,Math.min(start,x.end)],[Math.max(end,x.start),x.end]].map(([a,b])=>{
-        const text=x.text.slice(a,b);return {start:a+text.length-text.trimStart().length,end:b-text.length+text.trimEnd().length};
-      }).filter(r=>r.end>r.start).map((range,index)=>({...x,...range,id:index===0?x.id:(globalThis.crypto?.randomUUID?.()||`highlight-${Date.now()}-${Math.random().toString(36).slice(2)}`)}));
-    });
-  }
-  function add(ref,start,end,toggle=false){
+  function add(ref,start,end,emphasize=false){
     const item=marks.target(ref);if(!item||!Number.isInteger(start)||!Number.isInteger(end)||start<0||end>item.text.length||start>=end)return false;
     const selected=item.text.slice(start,end);if(!selected.trim())return false;
     start+=selected.length-selected.trimStart().length;end-=selected.length-selected.trimEnd().length;
     const fresh=read();if(fresh===null){message('형광펜 기록을 읽지 못했어요. 기존 기록을 덮어쓰지 않았습니다.');return false;}
-    if(toggle&&fresh.some(x=>same(x,item)&&x.start<end&&x.end>start))return commit(subtract(fresh,item,start,end),'다시 드래그한 부분의 형광펜을 지웠어요. 복습 목록에도 반영했습니다.',item.kind);
+    if(emphasize&&fresh.some(x=>same(x,item)&&x.start<end&&x.end>start))return commit(merge(fresh,{...item,emphasis:[{start,end}]},start,end),'다시 드래그한 범위를 보라색으로 더 강조했어요.',item.kind);
     if(fresh.some(x=>same(x,item)&&x.start<=start&&x.end>=end)){items=fresh;paint();message('이미 형광펜으로 표시한 구절이에요.');return true;}
     return commit(merge(fresh,item,start,end),'형광펜 구절을 내 학습 노트에 저장했어요.',item.kind);
   }
@@ -97,7 +91,7 @@ window.RecipeHighlights = (() => {
     root.querySelectorAll('mark.recipe-highlight').forEach(el=>el.replaceWith(document.createTextNode(el.textContent)));
     root.normalize();
     if(root.textContent!==item.text)return template.innerHTML;
-    const ranges=items.filter(x=>same(x,item)).sort((a,b)=>a.start-b.start);
+    const ranges=marks.layerSegments(items.filter(x=>same(x,item)).sort((a,b)=>a.start-b.start));
     if(ranges.length){
       const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];let node,offset=0;
       while((node=walker.nextNode())){nodes.push({node,start:offset,end:offset+node.data.length});offset+=node.data.length;}
@@ -106,7 +100,7 @@ window.RecipeHighlights = (() => {
         const fragment=document.createDocumentFragment();let cursor=0;
         for(const range of segments){const start=Math.max(0,range.start-entry.start),end=Math.min(entry.node.data.length,range.end-entry.start);if(start<cursor)continue;
           fragment.append(document.createTextNode(entry.node.data.slice(cursor,start)));
-          const mark=document.createElement('mark');mark.className='recipe-highlight';mark.dataset.highlightId=range.id;mark.textContent=entry.node.data.slice(start,end);fragment.append(mark);cursor=end;
+          const mark=document.createElement('mark');mark.className='recipe-highlight'+(range.emphasized?' highlight-emphasis':'');mark.dataset.highlightId=range.id;mark.textContent=entry.node.data.slice(start,end);fragment.append(mark);cursor=end;
         }
         fragment.append(document.createTextNode(entry.node.data.slice(cursor)));entry.node.replaceWith(fragment);
       }
@@ -128,23 +122,35 @@ window.RecipeHighlights = (() => {
     return {ref:row.dataset.recipeMarkRow,start:before.toString().length,end:through.toString().length,selected};
   }
   function capture(){
+    if(suppressDoubleSelection)return false;
     const value=selection();if(!value)return false;
     blockedUntil=Date.now()+500;
     const saved=add(value.ref,value.start,value.end,true);if(saved)value.selected.removeAllRanges();return true;
   }
+  document.addEventListener('mousedown',event=>{suppressDoubleSelection=event.detail>1&&!!event.target.closest('mark[data-highlight-id]');},true);
   document.addEventListener('pointerup',event=>{if(event.button===0)capture();});
+  document.addEventListener('dblclick',event=>{
+    const mark=event.target.closest('mark[data-highlight-id]');if(!mark)return;
+    event.preventDefault();event.stopImmediatePropagation();blockedUntil=Date.now()+500;suppressDoubleSelection=false;
+    window.getSelection()?.removeAllRanges();remove(mark.dataset.highlightId);
+  },true);
   document.addEventListener('keyup',event=>{if(event.key==='Shift')capture();});
   // A text drag must not also open the sentence's existing blank quiz.
   document.addEventListener('click',event=>{
+    // Keep a marked sentence's single click from opening its blank quiz before a double click.
+    if(event.target.closest('mark[data-highlight-id]')){event.preventDefault();event.stopImmediatePropagation();return;}
     if(!event.target.closest('.recipe-mark-content'))return;
     if(Date.now()<blockedUntil||capture()){event.preventDefault();event.stopImmediatePropagation();}
   },true);
+  function quote(item){
+    return esc(item.text.slice(0,item.start))+marks.layerSegments([item]).map(range=>`<mark data-highlight-id="${esc(item.id)}" class="${range.emphasized?'highlight-emphasis':''}">${esc(item.text.slice(range.start,range.end))}</mark>`).join('')+esc(item.text.slice(item.end));
+  }
   function renderNotes(){
-    if(!items.length)return `<section class="empty"><h2>필요한 구절이나 문장 전체를 형광펜으로 표시해요</h2><p>레시피·소스·치수 정리표나 직접 쓴 글의 비교 결과를 드래그하면 선택한 범위가 여기에 저장돼요.<br>표시한 구절을 다시 드래그하면 그 부분만 지워져요.</p><button type="button" class="primary" data-action="guide">레시피에서 형광펜 표시하기</button><p class="recipe-highlight-status" role="status">${esc(status())}</p></section>`;
+    if(!items.length)return `<section class="empty"><h2>필요한 구절이나 문장 전체를 형광펜으로 표시해요</h2><p>레시피·소스·치수 정리표나 직접 쓴 글의 비교 결과를 드래그하면 선택한 범위가 여기에 저장돼요.<br>표시 위를 다시 드래그하면 더 넓고 진한 보라색으로 강조해요. 표시를 더블클릭하면 그 구절의 겹친 표시를 모두 지워요.</p><button type="button" class="primary" data-action="guide">레시피에서 형광펜 표시하기</button><p class="recipe-highlight-status" role="status">${esc(status())}</p></section>`;
     const groups=new Map();[...items].sort((a,b)=>b.createdAt-a.createdAt).forEach(x=>{const key=`${x.kind}:${x.sourceId}`;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(x);});
     return `<section class="recipe-highlight-notes" aria-label="형광펜 구절"><div class="recipe-review-start"><div><h2>형광펜 구절만 복습하기</h2><p>형광펜으로 표시한 ${items.length}개 범위에서 빈칸을 만들어요. 문장 전체 표시도 함께 모았어요.</p></div><button type="button" class="primary" data-highlight-review>형광펜 전체 빈칸 맞히기 →</button></div><p class="recipe-highlight-status" role="status" aria-live="polite">${esc(status())}</p>${[...groups.values()].map(group=>{
       const first=group[0],info=marks.source(first.kind,first.sourceId);
-      return `<article class="panel recipe-mark-group"><div class="panel-head"><div><span class="eyebrow">${info.comparison?(first.kind==='comparison-writing'?'직접 쓰고 비교 · 내가 쓴 문장':'직접 쓰고 비교 · 핵심 확인'):info.summary?'비교하며 외우기 · '+(first.kind==='summary-sauces'?'소스·용량':'치수·제출'):first.kind==='pair'?'함께 만드는 순서':'한 메뉴 레시피'}</span><h2>${esc(info.title)}</h2></div><span class="badge">형광펜 ${group.length}</span></div><ul>${group.map(x=>{const {ref}=marks.locate(x),date=new Date(x.createdAt),caption=marks.caption(x);return `<li class="recipe-mark-note"><div class="recipe-mark-meta"><strong>${esc(caption)}</strong><time datetime="${date.toISOString()}">${date.toLocaleDateString('ko-KR')} 표시</time></div><p class="recipe-highlight-quote">${esc(x.text.slice(0,x.start))}<mark>${esc(x.text.slice(x.start,x.end))}</mark>${esc(x.text.slice(x.end))}</p><div class="recipe-mark-note-actions">${ref?`<button type="button" data-highlight-open="${esc(x.id)}" aria-label="${esc(info.title+' '+caption)} 형광펜 위치 보기">${info.summary?'정리표':'레시피'}에서 보기 ↗</button>`:''}<button type="button" class="text-button" data-highlight-remove="${esc(x.id)}" aria-label="${esc(info.title+' '+caption)} 형광펜 해제">형광펜 해제</button></div></li>`;}).join('')}</ul></article>`;
+      return `<article class="panel recipe-mark-group"><div class="panel-head"><div><span class="eyebrow">${info.comparison?(first.kind==='comparison-writing'?'직접 쓰고 비교 · 내가 쓴 문장':'직접 쓰고 비교 · 핵심 확인'):info.summary?'비교하며 외우기 · '+(first.kind==='summary-sauces'?'소스·용량':'치수·제출'):first.kind==='pair'?'함께 만드는 순서':'한 메뉴 레시피'}</span><h2>${esc(info.title)}</h2></div><span class="badge">형광펜 ${group.length}</span></div><ul>${group.map(x=>{const {ref}=marks.locate(x),date=new Date(x.createdAt),caption=marks.caption(x);return `<li class="recipe-mark-note"><div class="recipe-mark-meta"><strong>${esc(caption)}</strong><time datetime="${date.toISOString()}">${date.toLocaleDateString('ko-KR')} 표시</time></div><p class="recipe-highlight-quote">${quote(x)}</p><div class="recipe-mark-note-actions">${ref?`<button type="button" data-highlight-open="${esc(x.id)}" aria-label="${esc(info.title+' '+caption)} 형광펜 위치 보기">${info.summary?'정리표':'레시피'}에서 보기 ↗</button>`:''}<button type="button" class="text-button" data-highlight-remove="${esc(x.id)}" aria-label="${esc(info.title+' '+caption)} 형광펜 해제">형광펜 해제</button></div></li>`;}).join('')}</ul></article>`;
     }).join('')}</section>`;
   }
   document.addEventListener('click',event=>{

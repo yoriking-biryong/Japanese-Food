@@ -1,7 +1,7 @@
 'use strict';
 window.MenuPractice = (() => {
   const KEY='ilsik-study:menu-writing:v1:', facts=window.MENU_PRACTICE_FACTS;
-  const menus=new Map(window.MENUS.map(m=>[m.id,m])), writing=new Map(), rounds=new Map();
+  const menus=new Map(window.MENUS.map(m=>[m.id,m])), writing=new Map(), rounds=new Map(), comparisons=new Map();
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let hooks={};
   function shuffle(input,previous=[]){
@@ -26,12 +26,13 @@ window.MenuPractice = (() => {
   function readDraft(id){
     try{const raw=localStorage.getItem(KEY+id);if(raw===null)return {text:'',checked:false,status:'이 메뉴의 글은 입력할 때마다 이 브라우저에 저장됩니다.'};
       const value=JSON.parse(raw);if(value.version!==1||typeof value.text!=='string'||value.text.length>10000)throw Error('format');
-      return {text:value.text,checked:false,status:'이 메뉴에 저장한 글을 불러왔습니다.'};
+      return {text:value.text,checked:value.checked===true,status:'이 메뉴에 저장한 글을 불러왔습니다.'};
     }catch{return {text:'',checked:false,status:'저장한 글을 읽지 못했습니다. 기존 저장 내용은 그대로 두었습니다.'};}
   }
   function draft(id){if(!writing.has(id))writing.set(id,readDraft(id));return writing.get(id);}
   function saveDraft(id,text){
-    const s=draft(id);s.text=String(text).slice(0,10000);s.checked=false;
+    const s=draft(id),next=String(text).slice(0,10000);if(s.text===next)return true;
+    s.text=next;s.checked=false;
     try{localStorage.setItem(KEY+id,JSON.stringify({version:1,text:s.text,updatedAt:Date.now()}));s.status='저장됨 · 이 메뉴의 직접 쓴 글';return true;}
     catch{s.status='저장하지 못했습니다. 입력한 글을 복사해 보관해 주세요.';return false;}
   }
@@ -72,8 +73,9 @@ window.MenuPractice = (() => {
   }
   function comparison(menu,text){
     const result=compareWriting(text,menu.steps),checks=mentions(text,menu.id);
+    comparisons.set(menu.id,{text,steps:[...menu.steps]});
     const highlight=window.ComparisonHighlights;
-    const ownWriting=result.rows.map((row,line)=>`<li class="menu-writing-step" data-comparison-own-row="${line}"><header class="menu-writing-step-head"><strong>내가 쓴 ${line+1}번째 문장</strong><span class="menu-writing-state">${Number.isInteger(row.step)?`수업 ${row.step+1}단계와 연결`:'연결 단계 확인 필요'}</span>${row.status==='order'?'<span class="menu-writing-order">내 글 순서 확인</span>':''}</header>${highlight.temporaryWriting(menu,row.text,line)}</li>`).join('');
+    const ownWriting=result.rows.map((row,line)=>`<li class="menu-writing-step" data-comparison-own-row="${line}"><header class="menu-writing-step-head"><strong>내가 쓴 ${line+1}번째 문장</strong><span class="menu-writing-state">${Number.isInteger(row.step)?`수업 ${row.step+1}단계와 연결`:'연결 단계 확인 필요'}</span>${row.status==='order'?'<span class="menu-writing-order">내 글 순서 확인</span>':''}</header>${highlight.temporaryWriting(menu,row.text,line,result.rows.slice(0,line).filter(x=>x.text===row.text).length)}</li>`).join('');
     const sequence=result.matches.map(match=>{
       const i=match.step,row=match.line>=0?result.rows[match.line]:null;
       return `<li class="menu-writing-step ${row?'is-linked':'is-unlinked'}" data-comparison-row="${i}">
@@ -87,11 +89,11 @@ window.MenuPractice = (() => {
       <ul class="menu-writing-checklist">${checks.map(c=>`<li class="${c.mentioned?'is-mentioned':'needs-review'}"><span>${c.mentioned?'언급 찾음':'다시 확인'}</span><div><strong>${esc(c.fact.label)}</strong>${highlight.fact(menu,c.fact)}</div></li>`).join('')}</ul>
       <div class="menu-writing-split" aria-label="내 글과 전체 수업 단계 나란히 비교">
         <section class="menu-writing-pane" aria-labelledby="writing-own-title-${menu.id}">
-          <header class="menu-writing-pane-head"><h5 id="writing-own-title-${menu.id}">내가 쓴 글</h5><p>작성한 순서 그대로 · ${result.lines.length}문장</p><p>드래그하면 분홍색 비교 표시 · 다시 드래그하면 지우기<br>새로 비교하면 초기화되며 학습 노트에는 저장하지 않습니다.</p><span class="screen-reader" data-comparison-status role="status" aria-live="polite"></span></header>
+          <header class="menu-writing-pane-head"><h5 id="writing-own-title-${menu.id}">내가 쓴 글</h5><p>작성한 순서 그대로 · ${result.lines.length}문장</p><p>드래그·다시 드래그 → 분홍 표시 · 표시 더블클릭 → 지우기<br>내용이 같은 문장의 표시는 다시 비교하거나 새로고침해도 유지합니다.</p><span class="screen-reader" data-comparison-status role="status" aria-live="polite"></span></header>
           <div class="menu-writing-pane-body" role="region" aria-labelledby="writing-own-title-${menu.id}" tabindex="0"><ol class="menu-writing-sequence">${ownWriting}</ol></div>
         </section>
         <section class="menu-writing-pane menu-writing-flow" aria-labelledby="writing-flow-title-${menu.id}">
-          <header class="menu-writing-pane-head"><h5 id="writing-flow-title-${menu.id}">전체 수업 단계</h5><p class="menu-writing-legend"><span>내 글과 연결됨 ${result.matched}개</span><span class="is-unlinked">연결하지 못함 ${result.missing.length}개</span></p><p>모든 단계에서 드래그하면 분홍색 비교 표시가 생깁니다. 다시 드래그하면 지워지고, 새로 비교하면 초기화됩니다. 학습 노트에는 저장하지 않습니다.</p><span class="screen-reader" data-comparison-status role="status" aria-live="polite"></span></header>
+          <header class="menu-writing-pane-head"><h5 id="writing-flow-title-${menu.id}">전체 수업 단계</h5><p class="menu-writing-legend"><span>내 글과 연결됨 ${result.matched}개</span><span class="is-unlinked">연결하지 못함 ${result.missing.length}개</span></p><p>드래그·다시 드래그 → 분홍 표시 · 표시 더블클릭 → 지우기<br>내용이 같은 단계의 표시는 다시 비교하거나 새로고침해도 유지합니다.</p><span class="screen-reader" data-comparison-status role="status" aria-live="polite"></span></header>
           <div class="menu-writing-pane-body" role="region" aria-labelledby="writing-flow-title-${menu.id}" tabindex="0">${result.missing.length?'':'<p class="menu-writing-complete">모든 수업 단계와 비슷한 문장을 찾았습니다. 양념·분량과 마무리도 확인해 주세요.</p>'}<ol class="menu-writing-sequence">${sequence}</ol></div>
         </section>
       </div>
@@ -109,6 +111,7 @@ window.MenuPractice = (() => {
   document.addEventListener('input',event=>{
     const el=event.target;if(!el.matches('[data-menu-writing]'))return;
     const id=el.dataset.menuWriting;if(!menus.has(id))return;
+    if(draft(id).text===el.value)return;
     saveDraft(id,el.value);const root=el.closest('.menu-writing');root.querySelector('[data-menu-writing-status]').textContent=draft(id).status;
     root.querySelector('[data-menu-writing-result]').innerHTML='<p class="menu-writing-placeholder">글이 바뀌었습니다. 비교 버튼을 눌러 다시 확인해 주세요.</p>';
   });
@@ -126,7 +129,13 @@ window.MenuPractice = (() => {
         const ok=hooks.saveNote?.({id:'menu-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8),menu:menu.id,text:text.trim(),when:Date.now()});
         status.textContent=ok?'내 학습 노트 > 오답노트에 저장했습니다.':'노트에 저장하지 못했습니다. 입력한 글을 복사해 보관해 주세요.';return;
       }
-      s.text=text;s.checked=true;root.querySelector('[data-menu-writing-result]').innerHTML=comparison(menu,text);return;
+      const output=root.querySelector('[data-menu-writing-result]'),previous=comparisons.get(menu.id);
+      if(s.checked&&previous?.text===text&&previous.steps.length===menu.steps.length&&previous.steps.every((step,i)=>step===menu.steps[i])&&output.querySelector('.menu-writing-result')){
+        status.textContent='내용이 같아 기존 비교 화면과 분홍 표시를 유지합니다.';return;
+      }
+      s.text=text;s.checked=true;
+      try{localStorage.setItem(KEY+menu.id,JSON.stringify({version:1,text,checked:true,updatedAt:Date.now()}));}catch{status.textContent='비교 내용을 저장하지 못했습니다. 현재 화면은 유지합니다.';}
+      output.innerHTML=comparison(menu,text);window.ComparisonHighlights.restore(output);return;
     }
     if(button.hasAttribute('data-menu-game-mode')||button.hasAttribute('data-menu-game-retry')){
       const old=round(menu.id),mode=button.dataset.menuGameMode||old.mode;rounds.set(menu.id,makeRound(menu.id,mode,old.cards));

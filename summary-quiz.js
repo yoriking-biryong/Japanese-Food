@@ -13,11 +13,13 @@ window.SummaryQuiz = (() => {
     add(/\d+(?:\.\d+)?\s*:\s*\d+(?:\.\d+)?/g,'ratio');
     add(/(?<![\d.])\d+(?:\.\d+)?(?:\s*[~～–-]\s*\d+(?:\.\d+)?)?\s*g\b/g,'weight');
     add(countRE,'count');
+    add(/오리발 모양|반달 모양|웨지 모양/g,'lemon-shape');
     // The abalone reference intentionally specifies a shape instead of inventing cm.
     if(!blanks.length)add(/전복과 비슷한 크기|한입 크기|정사각형/g,'shape');
     return blanks.sort((a,b)=>a.start-b.start||b.end-a.end).filter((b,i,a)=>!i||b.start>=a[i-1].end);
   }
   function options(blank) {
+    if(blank.kind==='lemon-shape')return shuffle([blank.answer,...['오리발 모양','반달 모양','웨지 모양','원형'].filter(s=>s!==blank.answer)]);
     if(blank.kind==='seasoning'&&stockNames.has(blank.answer.replace(/\s/g,''))){
       // Do not use interchangeable stock names as incorrect answers.
       return shuffle([blank.answer,...shuffle(['진간장','청주','맛술','식초']).slice(0,3)]);
@@ -43,7 +45,7 @@ window.SummaryQuiz = (() => {
     }
     return window.LessonStudy.options(blank);
   }
-  const kindLabel=b=>({ratio:'비율',weight:'무게',count:'개수',shape:'크기'}[b.kind]||'');
+  const kindLabel=b=>({ratio:'비율',weight:'무게',count:'개수',shape:'크기','lemon-shape':'레몬 모양'}[b.kind]||'');
   function trigger(menu,mode,index,text,label) {
     const formatted=window.SummaryReference.format(menu.id,mode,index,text);
     if(!parse(text,'all').length)return `<strong>${formatted}</strong>`;

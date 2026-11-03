@@ -61,6 +61,11 @@
 .summary-memory-grid dl{margin:0;display:grid;gap:9px}
 .summary-memory-grid dl>div{display:grid;grid-template-columns:125px 1fr;gap:8px}
 .summary-memory-grid dt{font-weight:650}.summary-memory-grid dd{margin:0}
+.summary-finishing{background:#fffdf4;border-color:#e4d9ae}
+.summary-finishing .text-button{padding:0;white-space:normal;font-size:inherit;text-align:left;line-height:inherit}
+.summary-finish-actions{margin-top:15px}
+.summary-finish-actions button{padding:9px 12px;font-size:.8rem;white-space:normal;color:#263f75;border-color:#d5c88f;background:#fff}
+.summary-finish-actions button:hover{background:#fff4c5}
 mark.summary-group-highlight{background:#ffe67f;color:#263c5a;border-radius:3px;padding:2px 4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .summary-group-controls select.summary-group-highlight,.summary-group-controls option.summary-group-highlight{background:#ffe67f;color:#263c5a}
 .summary-group-controls option:not(.summary-group-highlight){background:#fff;color:#263c5a}

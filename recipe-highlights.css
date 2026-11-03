@@ -16,3 +16,6 @@ mark.recipe-highlight,.recipe-highlight-quote mark,.recipe-highlight-notes detai
 [data-comparison-selectable]{-webkit-user-select:text;user-select:text;cursor:text;margin:0;padding:5px 0;line-height:1.8}
 [data-comparison-selectable]::selection,[data-comparison-selectable] *::selection{background:#f9bfd5;color:#4d2034}
 mark.comparison-pink{background:#f9bfd5;color:inherit;border-radius:2px;padding:1px 0;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* A second pass is wider without shifting letters or changing saved selection offsets. */
+mark.recipe-highlight.highlight-emphasis,.recipe-highlight-quote mark.highlight-emphasis{background:#c4adeb;color:#281641;padding:3px 0;box-shadow:0 0 0 2px #c4adeb;border-radius:3px}
